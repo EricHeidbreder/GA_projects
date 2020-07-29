@@ -1,4 +1,4 @@
-,state,participation_act_2017,english_act_2017,math_act_2017,reading_act_2017,science_act_2017,composite_act_2017,participation_sat_2017,ebrw_sat_2017,math_sat_2017,total_sat_2017,participation_sat_2018,evidence_based_reading_and_writing_sat_2018,math_sat_2018,total_sat_2018,participation_act_2018,composite_act_2018,participation_sat_2019,ebrw_sat_2019,math_sat_2019,total_sat_2019,participation_act_2019,composite_act_2019
+,state,participation_act_2017,english_act_2017,math_act_2017,reading_act_2017,science_act_2017,composite_act_2017,participation_sat_2017,ebrw_sat_2017,math_sat_2017,total_sat_2017,participation_sat_2018,ebrw_sat_2018,math_sat_2018,total_sat_2018,participation_act_2018,composite_act_2018,participation_sat_2019,ebrw_sat_2019,math_sat_2019,total_sat_2019,participation_act_2019,composite_act_2019
 0,Alabama,1.0,18.9,18.4,19.7,19.4,19.2,0.05,593.0,572.0,1165.0,0.06,595.0,571.0,1166.0,1.0,19.1,0.07,583,560,1143,1.0,18.9
 1,Alaska,0.65,18.7,19.8,20.4,19.9,19.8,0.38,547.0,533.0,1080.0,0.43,562.0,544.0,1106.0,0.33,20.8,0.41,556,541,1097,0.38,20.1
 2,Arizona,0.62,18.6,19.8,20.1,19.8,19.7,0.3,563.0,553.0,1116.0,0.29,577.0,572.0,1149.0,0.66,19.2,0.31,569,565,1134,0.73,19.0
@@ -50,5 +50,3 @@
 48,West Virginia,0.69,20.0,19.4,21.2,20.5,20.4,0.14,558.0,528.0,1086.0,0.28,513.0,486.0,999.0,0.65,20.3,0.99,483,460,943,0.49,20.8
 49,Wisconsin,1.0,19.7,20.4,20.6,20.9,20.5,0.03,642.0,649.0,1291.0,0.03,641.0,653.0,1294.0,1.0,20.5,0.03,635,648,1283,1.0,20.3
 50,Wyoming,1.0,19.4,19.8,20.8,20.6,20.2,0.03,626.0,604.0,1230.0,0.03,633.0,625.0,1257.0,1.0,20.0,0.03,623,615,1238,1.0,19.8
-51,Puerto Rico,,,,,,,,,,,,,,,,,,483,462,944,,
-52,Virgin Islands,,,,,,,,,,,,,,,,,,490,445,935,,
