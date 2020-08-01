@@ -1,183 +1,120 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 1: Standardized Testing, Statistical Summaries and Inference
+# Executive Summary
 
-### Overview
+## 1. Problem statement
 
-Our first module in DSI covers:
-- basic statistics (distributions, confidence intervals, hypothesis testing)
-- many Python programming concepts
-- programmatically interacting with files and directories
-- visualizations
-- EDA
-- working with Jupyter notebooks for development and reporting
-
-You might wonder if you're ready to start doing data science. While you still have **tons** to learn, there are many aspects of the data science process that you're ready to tackle. Project 1 aims to allow you to practice and demonstrate these skills.
-
-For our first project, we're going to take a look at aggregate SAT and ACT scores and participation rates from each state in the United States. We'll seek to identify trends in the data and combine our data analysis with outside research to identify likely factors influencing participation rates and scores in various states.
-
-Generally speaking, you will be asked to come up with a data science problem. Here's a specific prompt that should help you craft this statement:
-> The new format for the SAT was released in March 2016. As an employee of the College Board - the organization that administers the SAT - you are a part of a team that tracks statewide participation and recommends where money is best spent to improve SAT participation rates. Your presentation and report should be geared toward **non-technical** executives with the College Board and you will use the provided data and outside research to make recommendations about how the College Board might work to increase the participation rate in a **state of your choice**.
+**What states are most likely to increase their level of participation in the SAT next year?**
 
 ---
 
-### Datasets
+## 2. Description of Data
 
-#### Provided Data
+#### Original data:
 
-For this project, you'll have six provided datasets:
+|         | act_2017 | act_2018 | act_2019 | sat_2017 | sat_2018 | sat_2019 | final    |
+|---|----------|----------|----------|----------|----------|----------|----------|
+|**Shape**| (51, 7)  | (51, 3)  | (52, 3)  | (51, 5)  | (51, 5)  | (53, 5)  | (51, 23) |
 
-- [2017 SAT Scores](./data/sat_2017.csv)
-- [2017 ACT Scores](./data/act_2017.csv)
-- [2018 SAT Scores](./data/sat_2018.csv)
-- [2018 ACT Scores](./data/act_2018.csv)
-- [2019 SAT Scores](./data/sat_2019.csv)
-- [2019 ACT Scores](./data/act_2019.csv)
+As you can see, our data was comprised of 7 datasets, and `act_2019` and `sat_2019` both had some extra rows. We needed to clean those up. The final, merged data consisted of **51 columns and 23 features**
 
-These data give average SAT and ACT scores by state, as well as participation rates for the classes of 2017, 2018, and 2019.
+#### Data Sources:
 
-You can see the sources for the SAT data [here](https://blog.collegevine.com/here-are-the-average-sat-scores-by-state/) and [here](https://blog.prepscholar.com/average-sat-scores-by-state-most-recent), and the source for the ACT data [here](https://blog.prepscholar.com/act-scores-by-state-averages-highs-and-lows). **Make sure you cross-reference your data with your data sources to eliminate any data collection or data entry issues.**
+* [SAT Source 1](https://blog.collegevine.com/here-are-the-average-sat-scores-by-state/)
+* [SAT Source 2](https://blog.prepscholar.com/average-sat-scores-by-state-most-recent)
+* [ACT Source](https://blog.prepscholar.com/act-scores-by-state-averages-highs-and-lows)
 
-#### Additional Data
-(_This data is for your reference only. It is not needed to complete the project. You are required to include all of the above csv data._)
+#### Data Dictionary:
 
-2018 and 2019 state-by-state average results and participation for the SAT are available in PDF reports [here](https://reports.collegeboard.org/sat-suite-program-results/state-results). 2018 ACT state-by-state mean composite scores and participation rates are [here](http://www.act.org/content/dam/act/unsecured/documents/cccr2018/Average-Scores-by-State.pdf) and 2019 data can be found [here](https://www.act.org/content/dam/act/secured/documents/cccr-2019/Average-Scores-by-State.pdf).
+|Feature|Type|Dataset|Description|
+|---|---|---|---|
+|**state**|*object*|sat_2017|The state within the United States| 
+|**participation_sat_2017**|*float*|sat_2017|Percentage of students who took the SAT exam in 2017, represented in decimals 0-1|
+|**participation_sat_2018**|*float*|sat_2018|Percentage of students who took the SAT exam in 2018, represented in decimals 0-1|
+|**participation_sat_2019**|*float*|sat_2019|Percentage of students who took the SAT exam in 2019, represented in decimals 0-1|
+|**ebrw_sat_2017**|*integer*|sat_2017|The average score for the Evidence-based Reading and Writing portion of the SAT exam in 2017. The minimum possible score is 200, the maximum is 800|
+|**ebrw_sat_2018**|*integer*|sat_2018|The average score for the Evidence-based Reading and Writing portion of the SAT exam in 2018. The minimum possible score is 200, the maximum is 800|
+|**ebrw_sat_2019**|*integer*|sat_2019|The average score for the Evidence-based Reading and Writing portion of the SAT exam in 2019. The minimum possible score is 200, the maximum is 800|
+|**math_sat_2017**|*integer*|sat_2017|The average score for the Math portion of the SAT exam in 2017. The minimum possible score is 200, the maximum is 800|
+|**math_sat_2018**|*integer*|sat_2018|The average score for the Math portion of the SAT exam in 2018. The minimum possible score is 200, the maximum is 800|
+|**math_sat_2019**|*integer*|sat_2019|The average score for the Math portion of the SAT exam in 2019. The minimum possible score is 200, the maximum is 800|
+|**total_sat_2017**|*integer*|sat_2017|The total of the averages of both portions of the SAT exam in 2017. The minimum possible score is 400, the maximum is 1600|
+|**total_sat_2018**|*integer*|sat_2018|The total of the averages of both portions of the SAT exam in 2018. The minimum possible score is 400, the maximum is 1600|
+|**total_sat_2019**|*integer*|sat_2019|The total of the averages of both portions of the SAT exam in 2019. The minimum possible score is 400, the maximum is 1600|
+|**participation_act_2017**|*float*|act_2017|Percentage of students who took the ACT exam in 2017. The minimum possible score is 1, the maximum possible score is 36|
+|**participation_act_2018**|*float*|act_2018|Percentage of students who took the ACT exam in 2018. The minimum possible score is 1, the maximum possible score is 36|
+|**participation_act_2019**|*float*|act_2019|Percentage of students who took the ACT exam in 2019. The minimum possible score is 1, the maximum possible score is 36|
+|**english_act_2017**|*float*|act_2017|The average score for the English portion of the ACT exam in 2017. The minimum possible score is 1, maximum is 36|
+|**english_act_2018**|*float*|act_2018|The average score for the English portion of the ACT exam in 2018. The minimum possible score is 1, maximum is 36|
+|**english_act_2019**|*float*|act_2019|The average score for the English portion of the ACT exam in 2019. The minimum possible score is 1, maximum is 36|
+|**math_act_2017**|*float*|act_2017|The average score for the Math portion of the ACT exam in 2017.  The minimum possible is 1, maximum possible is 36|
+|**reading_act_2017**|*float*|act_2017|The average score for the Reading portion of the ACT exam in 2017. The minimum possible score is 1, maximum is 36|
+|**science_act_2017**|*float*|act_2017|The average score for the Science portion of the ACT exam in 2017. The minimum possible score is 1, maximum is 36|
+|**composite_act_2017**|*float*|act_2017|The average of the scores from all the portions of the ACT exam in 2017. The minimum possible score is 1, maximum is 36|
+|**composite_act_2018**|*float*|act_2018|The average of the scores from all the portions of the ACT exam in 2018. The minimum possible score is 1, maximum is 36|
+|**composite_act_2019**|*float*|act_2019|The average of the scores from all the portions of the ACT exam in 2019. The minimum possible score is 1, maximum is 36|
 
-**This data has been compiled into CSV files which are also included in the *data* directory of this repo**
+### Exploratory Data Visualizations:
 
----
+[/]: <> (Thank you to Magnus on stack overflow for showing me how to comment: https://stackoverflow.com/questions/4823468/comments-in-markdown)
 
-### Deliverables
+[/]: <> (And thank you to zjffdu for showing me how to display local images: https://stackoverflow.com/questions/41604263/how-to-display-local-image-in-markdown)
+![Boxplots comparing ACT and SAT participation](./images/participation_boxplot.jpeg)
 
-All of your projects will comprise of a written technical report and a presentation. As we continue in the course, your technical report will grow in complexity, but for this initial project it will comprise:
-- A Jupyter notebook that describes your data with visualizations & statistical analysis.
-- A README markdown file the provides an introduction to and overview of your project.
-- Your presentation slideshow rendered as a .pdf file.
-**NOTE**: Your entire Github repository will be evaluated as your technical report. Make sure that your files and directories are named appropriately, that all necessary files are included, and that no unnecessary or incomplete files are included.
-
-For your first presentation, you'll be presenting to a **non-technical** audience. You should prepare a slideshow with appropriately scaled visuals to complement a compelling narrative. **Presentation duration will differ by market, so check with your local instructor.**
-
----
-
-### Technical Report Starter Code
-
-Future projects will require you to decide on the entire structure of your technical report. Here, we provide you with [starter code](./code/starter-code.ipynb) in a Jupyter notebook that will help to guide your data exploration and analysis. **If you choose to edit the core structure of this notebook, make sure you don't exclude any of the requested operations**.
-
----
-
-### Style Guide and Suggested Resources
-
-[Tim Dwyer](https://www.linkedin.com/in/jtimdwyer/) (former DSI student and TA) put together [this style guide](https://git.generalassemb.ly/DSIR-720/style-guide). Some recommendations are geared toward future projects (which will include modeling and span multiple notebooks), but generally these are great recommendations.
-
-Here's a link on [how to give a good lightning talk](https://www.semrush.com/blog/16-ways-to-prepare-for-a-lightning-talk/), which provides some good recommendations for short presentations.
-
-[Here's a great summary](https://towardsdatascience.com/storytelling-with-data-a-data-visualization-guide-for-business-professionals-97d50512b407) of the main points of the book _Storytelling with Data_, which I can't recommend enough. [Here's a blog post](http://www.storytellingwithdata.com/blog/2017/8/9/my-guiding-principles) by the author about his guiding principles for visualizations.
-
----
-
-### Submission
-
-**Your slides must be ready for presentation by the beginning of class on July 31.**
-
-**Materials must be submitted on Google Classroom by EOD (end of day) on July 31.**
-
-Your technical report will be hosted on Github Enterprise. Make sure it includes:
-
-- A README.md (that isn't this file)
-- Jupyter notebook(s) with your analysis (renamed to describe your project)
-- Data files
-- Presentation slides
-- Any other necessary files (images, etc.)
+![SAT vs ACT scores](./images/SAT_vs_ACT_scores.png)
 
 ---
 
-### Presentation Structure
+## 3. Primary findings and conclusions
 
-- **Must be within 10 minutes. Aim for ~7 minutes to allow ~3 minutes for Q&A.**
-- Use Google Slides or some other visual aid (Keynote, Powerpoint, etc).
-- Consider the audience. Assume you are presenting to non-technical executives with the College Board (the organization that administers the SATs).
-- Start with the **data science problem**.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level, **CODE IS ALWAYS INAPPROPRIATE FOR A NON-TECHNICAL AUDIENCE**).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
+### From the Data
+* The participation rate for the SATs is increasing, and the particiation rate for the ACTs is decreasing
+* Our data shows an inverse correlation between participation and total/composite score across both the SAT and ACT.
+* There is no strong correlation between SAT total score and ACT total score. Doing well on one does not mean doing well on the other. This can be interpreted to mean that the **SAT and ACT are testing for different things**
+ * This is good to keep in mind, see "Further Research"
+* Three states have defected from the ACT between 2017-2019: **Illinois, Colorado, and West Virginia**
 
-Be sure to rehearse and time your presentation before class.
 
+### Why did some states switch to SAT?
+
+#### Illinois
+    
+* SAT is better aligned with standards for what students should know in Illinois   
+    *Source: [Chicago Tribune](https://www.chicagotribune.com/news/ct-illinois-chooses-sat-met-20160211-story.html)* #Thank you zjffdu from Stack Overflow! https://stackoverflow.com/questions/41604263/how-to-display-local-image-in-markdown
+* Connected to their school rating system, accounts for "20% of a school's rating in achievement and growth" (Elaine Chen, "Illinois has embraced the SAT, and the ACT is mad about it"  
+    *Source: [Elaine Chen, Illinois has Embraced the SAT and the ACT is mad about it](https://chicago.chalkbeat.org/2018/7/27/21105418/illinois-has-embraced-the-sat-and-the-act-is-mad-about-it)*
+
+#### Colorado
+
+- SAT aligns with **Common Core standards** in English and math  
+- SAT measures the skills and knowledge that evidence shows is critical for **college and career readiness**  
+- Partnership with Khan Academy to provide **free test prep**  
+- Commitment to the **Student Data Privacy Pledge**  
+
+    *Source: ["Colorado's Switch from ACT to SAT"](https://www.coloradokids.org/wp-content/uploads/2016/01/ACTvsSAT_FINAL.pdf)*
+
+#### West Virginia
+
+* SAT is **cheaper** than ACT  
+* "Abundance of **student and teacher resources"**
+* Reputation as a **respected assessment**
+* Acceptance of SAT at all institutions of higher learning  
+
+    *Source: [Blaine Carragher, Dalton Hammonds, "UPDATE: W.Va. high school juniors now required to take SAT exam."](https://www.wsaz.com/content/news/All-WVa-high-school-juniors-to-begin-taking-SAT-exam-beginning-Spring-2018-444248263.html)
+    
 ---
+    
+## 4. Next Steps
 
-### Rubric
-Your instructors and IAs will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
+* **Update your selling points** to reflect reasearch-driven feedback
+ * SAT and ACT are entirely different tests and measure different things. 
+ * SAT measures more relevant skills related to college and career readiness
+ * SAT aligns with Common Core Standards
+ * SAT is cheaper than the ACT and provides resources to students and teachers through partnerships with Khan Academy
+ 
+* Pursue states where **ACT contracts are expiring**
+ * We have had success in Illinois, Colorado, and West Virginia when the ACTs contract proposals are compared side-by-side with ours
+ * If we can identify when those contracts are up, we can get started on preparing proposals
 
-**Scores will be out of 21 points based on the 7 items in the rubric.** <br>
-*3 points per section*<br>
-
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
-
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
-
-**Clarity of Message**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the project?
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Does the student demonstrate mastery masking in Pandas?
-- Does the student demonstrate mastery sorting in Pandas?
-
-**Data Cleaning and EDA**
-- Does the student fix data entry issues?
-- Are data appropriately labeled?
-- Are data appropriately typed?
-- Are datasets combined correctly?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-
-**Visualizations**
-- Are the requested visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Research and Conceptual Understanding**
-- Were useful insights gathered from outside sources?
-- Are sources clearly identified?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
-
-In order to pass the project, students must earn a minimum score of 1 for each category.
-- Earning below a 1 in one or more of the above categories would result in a failing project.
-- While a minimum of 1 in each category is the required threshold for graduation, students should aim to earn at least an average of 1.5 across each category. An average score below 1.5, while it may be passing, means students may want to solicit specific feedback in order to significantly improve the project before showcasing it as part of a portfolio or the job search.
-
-### REMEMBER:
-
-This is a learning environment and you are encouraged to try new things, even if they don't work out as well as you planned! While this rubric outlines what we look for in a _good_ project, it is up to you to go above and beyond to create a _great_ project. **Learn from your failures and you'll be prepared to succeed in the workforce**.
+* **Expand to the West Coast**, potentially California
+ * California is currently split between ACT and SAT, favoring SAT
+ * California [Department of Education homepage](https://www.cde.ca.gov/) shows a focus on the selling points noted in the previous slide
+ * Getting California to commit to an exclusive contract could help us get a foothold in the west coast. Oregon and Washington are showing similar trends
