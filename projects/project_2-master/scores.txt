@@ -1,0 +1,14 @@
+
+Wed Aug  5 00:27:33 2020:0.7129166848942851
+Wed Aug  5 00:27:44 2020:0.7129166848942851
+
+Wed Aug  5 00:39:16 2020: 0.7129166848942851 | Description: houses_train[fl1_under_3000_sf][['Exter Qual', '1st Flr SF', 'Kitchen Qual']]]
+Wed Aug  5 01:07:28 2020: 0.8154486118076774 | Description: 
+Wed Aug  5 01:08:01 2020: 0.8150079424531355 | Description: 
+Wed Aug  5 01:10:47 2020: 0.7866611446415951 | Description: 
+Wed Aug  5 01:13:28 2020: 0.8150079424531355 | Description: 
+Wed Aug  5 01:27:48 2020: 0.8360741438493491 | Description: 
+Wed Aug  5 01:28:16 2020: 0.8360741438493491 | Description: 
+Wed Aug  5 01:40:24 2020: 0.8607148885971532 | Description: Added Overall Quality
+Wed Aug  5 01:42:43 2020: 0.8834489841585644 | Description: Added neighborhoods
+Wed Aug  5 01:58:31 2020: 0.8898014737205776 | Description: Added total basement sqft
