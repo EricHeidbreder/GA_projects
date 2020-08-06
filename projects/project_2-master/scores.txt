@@ -12,3 +12,8 @@ Wed Aug  5 01:28:16 2020: 0.8360741438493491 | Description:
 Wed Aug  5 01:40:24 2020: 0.8607148885971532 | Description: Added Overall Quality
 Wed Aug  5 01:42:43 2020: 0.8834489841585644 | Description: Added neighborhoods
 Wed Aug  5 01:58:31 2020: 0.8898014737205776 | Description: Added total basement sqft
+Wed Aug  5 15:02:45 2020: 0.9215738534688533 | Description: Added total basement sqft
+Wed Aug  5 15:02:55 2020: 0.9215738534688533 | Description: Added some of the top correlations
+Wed Aug  5 16:09:35 2020: 0.9218414613983459 | Description: Added some of the top correlations
+Wed Aug  5 16:45:10 2020: 0.9218414613983459 | Description: Added some of the top correlations
+Wed Aug  5 16:45:52 2020: 0.9218414613983459 | Description: Added some of the top correlations
