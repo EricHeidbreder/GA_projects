@@ -92,7 +92,7 @@ def random_feature_thresh_test(data, target, features, threshold_start):
 def get_features(data, threshold):
     mean_corr = data.corr()['SalePrice'].mean()
     std_corr = np.std(data.corr()['SalePrice'])
-    abs_value_greater_than_thresh = abs(data.corr()['SalePrice']) > mean_corr + threshold * std_corr
+    abs_value_greater_than_thresh = abs(data.corr()['SalePrice']) > mean_corr * threshold
     # EdChum and dartdog from SO: https://stackoverflow.com/questions/29281815/pandas-select-dataframe-columns-using-boolean
     strong_corr_features = data.loc[:,  data.corr().columns[abs_value_greater_than_thresh]]
 
