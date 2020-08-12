@@ -15,8 +15,9 @@ from sklearn.impute import SimpleImputer
 
 
 def remove_outliers(data):
-    return data[(data['1st Flr SF'] < 3000) &
-               ((data)['Gr Liv Area'] < 3000)]
+    return data[(data['1st Flr SF'] < 4000) &
+               ((data)['Gr Liv Area'] < 4000) &
+               ((data)['Garage Yr Blt'] != 2207)]
 
 # Thanks Will Badr for this! https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779
 def imp_data(data):
@@ -116,29 +117,33 @@ def create_new_features(data):
     greater_than_1982 = data['Year Built'] > 1982
     data['built_1983_to_present'] = np.where(greater_than_1982, 1, 0)
     data['built_before_1983'] = np.where(~greater_than_1982, 1, 0)
-
+    
 
 # Creating my own polynomial features
 def poly_features(data):
-    data['Avg_bsmt_kitch_exter_qual'] = (data['Bsmt Qual_TA'] + data['Kitchen Qual_TA'] + data['Exter Qual_TA']) * 2
-    data['total_house_sf_x_overall_qual'] = np.log(data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1) * data['Overall Qual'])
+#     data['Avg_bsmt_kitch_exter_qual'] = (data['Bsmt Qual_TA'] + data['Kitchen Qual_TA'] + data['Exter Qual_TA']) * 2
+    data['log_total_house_sf'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1)
+    data['Overall Qual ^ 2'] = data['Overall Qual'] ** 2
+#     data['total_house_sf_x_overall_qual'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1) * data['Overall Qual']
     # Thank you Jezrael from Stack Overflow! https://stackoverflow.com/questions/42063716/pandas-sum-up-multiple-columns-into-one-column-without-last-column
 
     
 def remove_collinear_features(data):
-    collinear_features = ['Bsmt Qual_TA',
-                          'Kitchen Qual_TA',
-                          'Exter Qual_TA',
-                          'Bsmt Qual_TA',
+    collinear_features = [
                           '1st Flr SF',
                           '2nd Flr SF',
                           'Total Bsmt SF',
                           'Wood Deck SF',
                           'Open Porch SF',
-                          'Overall Qual',
-                          'Year Built',
                           'Gr Liv Area',
-                          'Lot Area']
+                          'Lot Area', 
+                         'BsmtFin SF 1',
+                         'BsmtFin SF 2',
+                         'Bsmt Unf SF',
+                         'Low Qual Fin SF',
+                          'Garage Yr Blt',
+                          'Year Remod/Add',
+                         ]
     columns_rm_collinear = [col for col in data.columns if col not in collinear_features]
     return columns_rm_collinear
     
