@@ -101,7 +101,7 @@ def get_features(data, threshold):
         return [feature for feature in features if feature not in features_not_in_list]
 
 
-def get_cval_score_mse(X, y):
+def get_cval_r2score_rmse(X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state=342)
     lr = LinearRegression()
     lr.fit(X_train, y_train)
@@ -109,7 +109,7 @@ def get_cval_score_mse(X, y):
     resids = y_test - y_pred
     print(f'The Cross Validation Score is: {cross_val_score(lr, X_train, y_train)}')
     print(f'The R2 score on testing data is: {lr.score(X_test, y_test)}')
-    print(f'The MSE is {metrics.mean_squared_error(y_test, y_pred, squared=False)}')
+    print(f'The RMSE is {metrics.mean_squared_error(y_test, y_pred, squared=False)}')
     return X_train, X_test, y_train, y_test
 
 def create_new_features(data):
