@@ -102,12 +102,12 @@ def get_features(data, threshold):
 
 
 def get_cval_r2score_rmse(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state=342)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.20, random_state=342)
     lr = LinearRegression()
     lr.fit(X_train, y_train)
     y_pred = lr.predict(X_test)
     resids = y_test - y_pred
-    print(f'The Cross Validation Score is: {cross_val_score(lr, X_train, y_train)}')
+    print(f'The Cross Validation Score is: {cross_val_score(lr, X_train, y_train, cv=10)}')
     print(f'The R2 score on testing data is: {lr.score(X_test, y_test)}')
     print(f'The RMSE is {metrics.mean_squared_error(y_test, y_pred, squared=False)}')
     return X_train, X_test, y_train, y_test
@@ -117,15 +117,28 @@ def create_new_features(data):
     greater_than_1982 = data['Year Built'] > 1982
     data['built_1983_to_present'] = np.where(greater_than_1982, 1, 0)
     data['built_before_1983'] = np.where(~greater_than_1982, 1, 0)
+    data['age_of_home'] = data['Year Built'] - 2010
+    data['age_of_garage'] = data['Garage Yr Blt'] - 2010
+    data['years_since_remodel'] = data['Year Remod/Add'].apply(lambda x: 2010 - x if x != 0 else x)
     
 
 # Creating my own polynomial features
 def poly_features(data):
 #     data['Avg_bsmt_kitch_exter_qual'] = (data['Bsmt Qual_TA'] + data['Kitchen Qual_TA'] + data['Exter Qual_TA']) * 2
-#     data['total_house_sf'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1)
     data['Overall Qual ^ 2'] = data['Overall Qual'] ** 2
     data['Overall Qual x 1st Flr SF'] = data['Overall Qual'] * data['1st Flr SF']
-    data['Overall Qual x Gr Liv Area'] = data['Overall Qual'] * data['Gr Liv Area']
+    data['Overall Qual x Gr Liv Area'] =  data['Overall Qual'] * data['Gr Liv Area']
+    data['Overall Qual x Exter Qual_Gd'] = data['Overall Qual'] * data['Exter Qual_Gd']
+    data['Overall Qual x Exter Qual_TA'] = data['Overall Qual'] * data['Exter Qual_TA']
+    data['Overall Qual x Foundation_PConc'] = data['Overall Qual'] * data['Foundation_PConc']
+    data['Overall Qual x BsmtFin Type 1_GLQ'] = data['Overall Qual'] * data['BsmtFin Type 1_GLQ']
+    data['Overall Qual x Full Bath_1'] = data['Overall Qual'] * data['Full Bath_1']
+    data['Overall Qual x Full Bath_2'] = data['Overall Qual'] * data['Full Bath_2']
+    data['Overall Qual x Neighborhood_NridgHt'] = data['Overall Qual'] * data['Neighborhood_NridgHt']
+    data['Overall Qual x Neighborhood_NoRidge'] = data['Overall Qual'] * data['Neighborhood_NoRidge']
+    data['Overall Qual x Fireplace Qu_NA'] = data['Overall Qual'] * data['Fireplace Qu_NA']
+    data['Overall Qual x Garage Cars'] = data['Overall Qual'] * data['Garage Cars']
+    data['age_of_home x age_of_garage'] = data['age_of_home'] * data['age_of_garage']
     
 #     data['total_house_sf_x_overall_qual'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1) * data['Overall Qual']
     # Thank you Jezrael from Stack Overflow! https://stackoverflow.com/questions/42063716/pandas-sum-up-multiple-columns-into-one-column-without-last-column
@@ -133,17 +146,18 @@ def poly_features(data):
     
 def remove_collinear_features(data):
     collinear_features = [
-#                           '1st Flr SF',
-#                           '2nd Flr SF',
+                          '1st Flr SF',
+                          '2nd Flr SF',
 #                           'Total Bsmt SF',
 #                           'Wood Deck SF',
 #                           'Open Porch SF',
-#                           'Gr Liv Area',
-                          'Lot Area', 
+                          'Gr Liv Area',
+#                           'Lot Area', 
 #                          'BsmtFin SF 1',
 #                          'BsmtFin SF 2',
 #                          'Bsmt Unf SF',
 #                          'Low Qual Fin SF',
+                            'Year Built',
                           'Garage Yr Blt',
                           'Year Remod/Add',
 #                             'Overall Qual',
