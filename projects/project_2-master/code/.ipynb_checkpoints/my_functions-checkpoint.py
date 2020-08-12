@@ -31,9 +31,9 @@ def imp_data(data):
             data[column].fillna('NA', inplace=True)
 
 
-def category_to_bool_cols(dataframe, list_of_columns):
+def category_to_dummies(dataframe, list_of_columns):
     for column in list_of_columns:
-        dummy_split = pd.get_dummies(dataframe[column], column, drop_first = True) # Creates dummy columns with the name {column}_{value_in_row} per get_dummies documentation
+        dummy_split = pd.get_dummies(dataframe[column], column, drop_first=True) # Creates dummy columns with the name {column}_{value_in_row} per get_dummies documentation
         for dummy_key in dummy_split: # Iterates through dummy_key in dummy_split
             dataframe[dummy_key] = dummy_split[dummy_key] # adds new columns named {dummy_key} to original dataframe
 
@@ -122,27 +122,31 @@ def create_new_features(data):
 # Creating my own polynomial features
 def poly_features(data):
 #     data['Avg_bsmt_kitch_exter_qual'] = (data['Bsmt Qual_TA'] + data['Kitchen Qual_TA'] + data['Exter Qual_TA']) * 2
-    data['log_total_house_sf'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1)
+#     data['total_house_sf'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1)
     data['Overall Qual ^ 2'] = data['Overall Qual'] ** 2
+    data['Overall Qual x 1st Flr SF'] = data['Overall Qual'] * data['1st Flr SF']
+    data['Overall Qual x Gr Liv Area'] = data['Overall Qual'] * data['Gr Liv Area']
+    
 #     data['total_house_sf_x_overall_qual'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1) * data['Overall Qual']
     # Thank you Jezrael from Stack Overflow! https://stackoverflow.com/questions/42063716/pandas-sum-up-multiple-columns-into-one-column-without-last-column
 
     
 def remove_collinear_features(data):
     collinear_features = [
-                          '1st Flr SF',
-                          '2nd Flr SF',
-                          'Total Bsmt SF',
-                          'Wood Deck SF',
-                          'Open Porch SF',
-                          'Gr Liv Area',
+#                           '1st Flr SF',
+#                           '2nd Flr SF',
+#                           'Total Bsmt SF',
+#                           'Wood Deck SF',
+#                           'Open Porch SF',
+#                           'Gr Liv Area',
                           'Lot Area', 
-                         'BsmtFin SF 1',
-                         'BsmtFin SF 2',
-                         'Bsmt Unf SF',
-                         'Low Qual Fin SF',
+#                          'BsmtFin SF 1',
+#                          'BsmtFin SF 2',
+#                          'Bsmt Unf SF',
+#                          'Low Qual Fin SF',
                           'Garage Yr Blt',
                           'Year Remod/Add',
+#                             'Overall Qual',
                          ]
     columns_rm_collinear = [col for col in data.columns if col not in collinear_features]
     return columns_rm_collinear
@@ -152,7 +156,7 @@ def clean_train_data_export_csv(data, nominal_categories, categories_to_log):
     data = remove_outliers(data)
     create_new_features(data)
     imp_data(data)
-    category_to_bool_cols(data, nominal_categories)
+    category_to_dummies(data, nominal_categories)
     poly_features(data)
     log_cols(data, categories_to_log)
     columns_rm_collinear = remove_collinear_features(data)
@@ -162,7 +166,7 @@ def clean_train_data_export_csv(data, nominal_categories, categories_to_log):
 def clean_test_data_export_csv(data, nominal_categories, categories_to_log):
     create_new_features(data)
     imp_data(data)
-    category_to_bool_cols(data, nominal_categories)
+    category_to_dummies(data, nominal_categories)
     poly_features(data)
     log_cols(data, categories_to_log)
     columns_rm_collinear = remove_collinear_features(data)
