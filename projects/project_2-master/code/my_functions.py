@@ -90,14 +90,12 @@ def get_features(data, threshold):
     # EdChum and dartdog from SO: https://stackoverflow.com/questions/29281815/pandas-select-dataframe-columns-using-boolean
     strong_corr_features = data.loc[:,  data.corr().columns[abs_value_greater_than_thresh]]
 
-    features = list(strong_corr_features[1:])
-    features_not_in_list = ['SalePrice', 'PID', 'Id'
-                           ]
+    features = list(strong_corr_features) # need to pick only the strongest correlated features!
+    features_not_in_list = ['SalePrice', 'PID', 'Id']
     try:
         return [feature for feature in features if feature not in features_not_in_list]
     except:
-        features_not_in_list = ['PID', 'Id'
-                       ]
+        features_not_in_list = ['PID', 'Id']
         return [feature for feature in features if feature not in features_not_in_list]
 
 
@@ -116,15 +114,13 @@ def create_new_features(data):
     # Separating data into two groups, one pre 1982, one after 1982
     greater_than_1982 = data['Year Built'] > 1982
     data['built_1983_to_present'] = np.where(greater_than_1982, 1, 0)
-    data['built_before_1983'] = np.where(~greater_than_1982, 1, 0)
     data['age_of_home'] = 2010 - data['Year Built'] 
-    data['age_of_garage'] = 2010 - data['Garage Yr Blt']
+    data['age_of_garage'] = data['Garage Yr Blt'].apply(lambda x: 2010 - x if x != 0 else x)
     data['years_since_remodel'] = data['Year Remod/Add'].apply(lambda x: 2010 - x if x != 0 else x)
     
 
 # Creating my own polynomial features
-def poly_features(data):
-#     data['Avg_bsmt_kitch_exter_qual'] = (data['Bsmt Qual_TA'] + data['Kitchen Qual_TA'] + data['Exter Qual_TA']) * 2
+def create_interaction_terms(data):
     data['Overall Qual ^ 2'] = data['Overall Qual'] ** 2
     data['Overall Qual x 1st Flr SF'] = data['Overall Qual'] * data['1st Flr SF']
     data['Overall Qual x Gr Liv Area'] =  data['Overall Qual'] * data['Gr Liv Area']
@@ -151,20 +147,11 @@ def remove_collinear_features(data):
     collinear_features = [
                           '1st Flr SF',
                           '2nd Flr SF',
-#                           'Total Bsmt SF',
-#                           'Wood Deck SF',
-#                           'Open Porch SF',
                           'Gr Liv Area',
                             'Garage Area',
-#                           'Lot Area', 
-#                          'BsmtFin SF 1',
-#                          'BsmtFin SF 2',
-#                          'Bsmt Unf SF',
-#                          'Low Qual Fin SF',
                             'Year Built',
                           'Garage Yr Blt',
                           'Year Remod/Add',
-#                             'Overall Qual',
                          ]
     columns_rm_collinear = [col for col in data.columns if col not in collinear_features]
     return columns_rm_collinear
@@ -175,7 +162,7 @@ def clean_train_data_export_csv(data, nominal_categories, categories_to_log):
     create_new_features(data)
     imp_data(data)
     category_to_dummies(data, nominal_categories)
-    poly_features(data)
+    create_interaction_terms(data)
     log_cols(data, categories_to_log)
     columns_rm_collinear = remove_collinear_features(data)
     return data[columns_rm_collinear]
@@ -185,7 +172,7 @@ def clean_test_data_export_csv(data, nominal_categories, categories_to_log):
     create_new_features(data)
     imp_data(data)
     category_to_dummies(data, nominal_categories)
-    poly_features(data)
+    create_interaction_terms(data)
     log_cols(data, categories_to_log)
     columns_rm_collinear = remove_collinear_features(data)
     return data[columns_rm_collinear]
