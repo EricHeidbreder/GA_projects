@@ -1,267 +1,80 @@
 ,Coefficients
-MS SubClass,-1273.7613669896793
-Lot Frontage,755.328227881939
-Lot Area,1565.417200588245
-Overall Qual,-2409.6928545840806
-Overall Cond,5536.138365072804
-Mas Vnr Area,3444.936367524451
-BsmtFin SF 1,8927.151188476813
-BsmtFin SF 2,1027.7833481432692
+Overall Cond,5710.473978940327
+Mas Vnr Area,3636.9748978606594
+BsmtFin SF 1,9625.931956548467
+BsmtFin SF 2,937.5847572678821
 Bsmt Unf SF,-0.0
-Total Bsmt SF,6501.10632616127
-Low Qual Fin SF,-239.9150585991165
-Bsmt Full Bath,1076.909400776041
-Bsmt Half Bath,-0.0
-Full Bath,204.21768716424623
-Half Bath,0.0
-Bedroom AbvGr,-0.0
-Kitchen AbvGr,-679.3199100288753
-TotRms AbvGrd,0.0
-Fireplaces,293.7235247973129
-Garage Cars,0.0
-Wood Deck SF,1694.7705551150389
-Open Porch SF,0.0
-Enclosed Porch,0.0
-3Ssn Porch,0.0
-Screen Porch,2993.1939940669117
-Pool Area,-0.0
-Misc Val,0.0
-Mo Sold,-0.0
-Yr Sold,-33.22835620879041
-MS Zoning_FV,1144.1051622824675
-MS Zoning_I (all),0.0
-MS Zoning_RH,349.5565857896617
-MS Zoning_RL,0.0
-MS Zoning_RM,-0.0
-MS SubClass_30,-0.0
-MS SubClass_40,0.0
-MS SubClass_45,472.9063901018626
-MS SubClass_50,379.9100968435023
-MS SubClass_60,0.0
-MS SubClass_70,381.7666188860093
-MS SubClass_75,0.0
-MS SubClass_80,-0.0
-MS SubClass_85,580.9968223086064
-MS SubClass_90,-761.7561278588462
-MS SubClass_120,-474.3208155943167
-MS SubClass_160,-782.5131737074485
-MS SubClass_180,125.07546538671458
-MS SubClass_190,-0.0
-Foundation_CBlock,-0.0
-Foundation_PConc,0.0
-Foundation_Slab,-0.0
-Foundation_Stone,202.42604558292783
-Foundation_Wood,85.25326038581352
-BsmtFin Type 1_BLQ,-567.5239669034097
-BsmtFin Type 1_GLQ,0.0
-BsmtFin Type 1_LwQ,-810.8716135515645
-BsmtFin Type 1_NA,-0.0
-BsmtFin Type 1_Rec,-964.4088870279443
-BsmtFin Type 1_Unf,180.94782032994976
-BsmtFin Type 2_BLQ,-173.21178311200325
-BsmtFin Type 2_GLQ,1149.3020679462993
-BsmtFin Type 2_LwQ,-519.6116315127222
-BsmtFin Type 2_NA,-0.0
-BsmtFin Type 2_Rec,-304.0100002055388
-BsmtFin Type 2_Unf,0.0
-Exterior 1st_AsphShn,0.0
-Exterior 1st_BrkComm,-213.01885527512556
-Exterior 1st_BrkFace,3299.8812213756446
-Exterior 1st_CemntBd,0.0
-Exterior 1st_HdBoard,-509.43316905231916
-Exterior 1st_MetalSd,296.19268957490175
-Exterior 1st_Plywood,0.0
-Exterior 1st_Stucco,0.0
-Exterior 1st_VinylSd,0.0
-Exterior 1st_Wd Sdng,-414.01786329885675
-Exterior 1st_WdShing,-0.0
-Exterior 2nd_AsphShn,73.68878149473746
-Exterior 2nd_Brk Cmn,0.0
-Exterior 2nd_BrkFace,-1650.548166734354
-Exterior 2nd_CBlock,0.0
-Exterior 2nd_CmentBd,0.0
-Exterior 2nd_HdBoard,-11.147083016752656
-Exterior 2nd_ImStucc,-585.2474571995938
-Exterior 2nd_MetalSd,0.0
-Exterior 2nd_Plywood,-301.44533017541215
-Exterior 2nd_Stucco,375.8253343224595
-Exterior 2nd_VinylSd,0.0
-Exterior 2nd_Wd Sdng,889.9589113308007
-Exterior 2nd_Wd Shng,270.87984169063645
-Heating_GasW,-0.0
-Heating_Grav,-0.0
-Street_Pave,744.5752233702775
-Neighborhood_Blueste,422.7894786565165
-Neighborhood_BrDale,241.31720099816755
-Neighborhood_BrkSide,1023.7737616697206
-Neighborhood_ClearCr,1144.6693066528107
-Neighborhood_CollgCr,-241.15135261301882
-Neighborhood_Crawfor,1321.533891739682
-Neighborhood_Edwards,-2203.593018811747
-Neighborhood_Gilbert,-327.1291364777609
-Neighborhood_Greens,540.6532756258534
-Neighborhood_IDOTRR,-1086.6180907479536
-Neighborhood_MeadowV,-150.80920232088647
-Neighborhood_Mitchel,-535.1953942986949
-Neighborhood_NAmes,-1207.8066369180274
-Neighborhood_NPkVill,1217.7342529236878
-Neighborhood_NWAmes,-1900.294938719067
-Neighborhood_NoRidge,0.0
-Neighborhood_NridgHt,0.0
-Neighborhood_OldTown,-1093.1399565732597
-Neighborhood_SWISU,-0.0
-Neighborhood_Sawyer,0.0
-Neighborhood_SawyerW,-729.2839013687969
-Neighborhood_Somerst,1275.7886570354312
-Neighborhood_StoneBr,3494.809847221909
-Neighborhood_Timber,0.0
-Neighborhood_Veenker,669.4903240313064
-Garage Finish_NA,0.0
-Garage Finish_RFn,-7.59624812508018
-Garage Finish_Unf,-0.0
-Lot Config_CulDSac,878.0701313268027
-Lot Config_FR2,-0.0
-Lot Config_FR3,-136.39736691713438
-Lot Config_Inside,735.2019054854208
-Lot Shape_IR2,-0.0
-Lot Shape_IR3,-184.1836981861144
-Lot Shape_Reg,-0.0
-Roof Matl_Tar&Grv,-38.45683144153508
-Roof Matl_WdShake,-144.0788145297308
-Roof Matl_WdShngl,671.8230643122735
-Roof Style_Gable,0.0
-Roof Style_Gambrel,217.12253502889823
-Roof Style_Hip,-0.0
-Roof Style_Mansard,-0.0
-Roof Style_Shed,-150.29431547913617
-Land Contour_HLS,2033.6786589625842
-Land Contour_Low,0.0
-Land Contour_Lvl,-0.0
-Utilities_NoSewr,0.0
-Land Slope_Mod,501.62021229694176
-Land Slope_Sev,0.0
-House Style_1.5Unf,-0.0
-House Style_1Story,-668.1272101892846
-House Style_2.5Fin,-1139.6115437812737
-House Style_2.5Unf,809.5986805975805
-House Style_2Story,0.0
-House Style_SFoyer,0.0
-House Style_SLvl,0.0
-Electrical_FuseF,-225.11535858729837
-Electrical_FuseP,-0.0
-Electrical_SBrkr,0.0
-Garage Type_Attchd,-0.0
-Garage Type_Basment,-434.6275197234267
-Garage Type_BuiltIn,0.0
-Garage Type_CarPort,-81.63874443842099
-Garage Type_Detchd,92.43505275670431
-Garage Type_NA,0.0
-Sale Type_CWD,725.2527049807986
-Sale Type_Con,888.1710731261816
-Sale Type_ConLD,92.568432412844
-Sale Type_ConLI,0.0
-Sale Type_ConLw,-0.0
-Sale Type_New,3454.289100823495
-Sale Type_Oth,64.66697103914383
-Sale Type_WD ,177.6421569165474
-Functional_Maj2,0.0
-Functional_Min1,1450.5340340816163
-Functional_Min2,1510.8031016218513
-Functional_Mod,0.0
-Functional_Typ,3433.0768598611726
-Exter Qual_Fa,-1248.1113980235634
-Exter Qual_Gd,-7006.718697271196
-Exter Qual_TA,0.0
-Exter Cond_Fa,-136.48368847575728
-Exter Cond_Gd,-0.0
-Exter Cond_Po,-1050.6522628706803
-Exter Cond_TA,494.7710886806878
-Bsmt Qual_Fa,-991.7597482444683
-Bsmt Qual_Gd,-5769.097000414926
-Bsmt Qual_NA,-0.0
-Bsmt Qual_Po,-0.0
-Bsmt Qual_TA,-4327.637189127284
-Condition 1_Feedr,0.0
-Condition 1_Norm,2173.6723571312336
-Condition 1_PosA,719.2080954909138
-Condition 1_PosN,1170.5172076001472
-Condition 1_RRAe,-548.541827799078
-Condition 1_RRAn,-0.0
-Condition 1_RRNe,-479.368934113423
-Condition 1_RRNn,-0.0
-Condition 2_Norm,1155.046779930822
-Condition 2_PosA,-16.15357532416714
-Bsmt Cond_Gd,394.89986320645585
-Bsmt Cond_NA,-0.0
-Bsmt Cond_TA,382.11459479855915
-Heating QC_Fa,-111.32949789658807
-Heating QC_Gd,-193.5912547706652
-Heating QC_TA,-1476.8577588339235
-Kitchen Qual_Fa,-2210.8582324219733
-Kitchen Qual_Gd,-5462.809672670254
-Kitchen Qual_TA,-5762.3955209051755
-Fireplace Qu_Fa,-433.58650935495797
-Fireplace Qu_Gd,8.978727820533022
-Fireplace Qu_NA,0.0
-Fireplace Qu_Po,-657.7835415591477
-Fireplace Qu_TA,-1393.6233988177605
-Garage Qual_Gd,1360.9272701987866
-Garage Qual_NA,0.0
-Garage Qual_Po,0.0
-Garage Qual_TA,-120.54110939167577
-Garage Cond_Fa,-217.7500346545636
-Garage Cond_Gd,-0.0
-Garage Cond_NA,0.0
-Garage Cond_Po,75.11073657714041
-Garage Cond_TA,-0.0
-Pool QC_NA,110.70850543243468
-Pool QC_TA,-0.0
-Full Bath_1,-0.0
-Full Bath_2,0.0
-Full Bath_3,2691.1616658578887
-Full Bath_4,-0.0
-Half Bath_1,2185.43792487831
-Half Bath_2,-393.99669787607127
-Bedroom AbvGr_1,0.0
-Bedroom AbvGr_2,0.0
-Bedroom AbvGr_3,-872.0702459885607
-Bedroom AbvGr_4,209.5799245988105
-Bedroom AbvGr_5,-1744.3980822079752
-Bedroom AbvGr_6,-0.0
-Kitchen AbvGr_1,787.1701260638606
-Kitchen AbvGr_2,-0.0
-Kitchen AbvGr_3,-919.5142204496716
-TotRms AbvGrd_4,-0.0
-TotRms AbvGrd_5,-0.0
-TotRms AbvGrd_6,191.20588200351835
-TotRms AbvGrd_7,-0.0
-TotRms AbvGrd_8,13.685366906117087
-TotRms AbvGrd_9,-969.9777988008061
-TotRms AbvGrd_10,-715.4490298361968
-TotRms AbvGrd_11,1978.973225180837
-TotRms AbvGrd_12,1957.5699810270864
-built_1983_to_present,1378.4530043164957
-age_of_home,-8440.948192542714
-age_of_garage,-481.0534929394025
-years_since_remodel,-3082.7501181642756
-log_lot_area,6475.679515318955
-log_1st_flr_sf,-1218.4701663950093
-log_bsmtfin_sf_1,-0.0
-log_gr_liv_area,-0.0
-Overall Qual ^ 2,-0.0
-Overall Qual x 1st Flr SF,7325.781467544741
-Overall Qual x Gr Liv Area,33513.542541714574
-Overall Qual x Exter Qual_Gd,-1176.3377882528978
-Overall Qual x Exter Qual_TA,-7973.887761831501
-Overall Qual x Foundation_PConc,2369.2911442073582
-Overall Qual x BsmtFin Type 1_GLQ,1292.7778688066048
-Overall Qual x Full Bath_1,-0.0
-Overall Qual x Full Bath_2,-0.0
-Overall Qual x Neighborhood_NridgHt,3002.1027630849653
-Overall Qual x Neighborhood_NoRidge,2252.726292128965
-Overall Qual x Fireplace Qu_NA,-3153.6232149683674
-Overall Qual x Garage Cars,2199.2734437676672
-Overall Qual x Garage Area,2699.7053975517947
-age_of_home x age_of_garage,0.0
-Overall Qual x Exterior 1st_VinylSd,101.07881552394579
-Overall Qual x Exterior 2nd_VinylSd,0.0
+Total Bsmt SF,8785.617196990977
+Low Qual Fin SF,-865.2791249268749
+Fireplaces,920.7756488654883
+Wood Deck SF,2038.4581441079947
+Enclosed Porch,585.4948088946585
+Screen Porch,2998.921798569795
+MS Zoning_FV,6132.73545671362
+MS Zoning_RH,1861.0542135029061
+MS Zoning_RL,8620.352915780531
+MS Zoning_RM,6815.901155289128
+MS SubClass_45,895.7829394107371
+MS SubClass_90,-2110.5165395064337
+MS SubClass_120,-1137.3964204900421
+MS SubClass_160,-2032.5771463915685
+Exterior 1st_BrkComm,-234.6607622188884
+Exterior 1st_BrkFace,2327.6921255562615
+Exterior 2nd_Wd Sdng,1246.4881990201493
+Exterior 2nd_Wd Shng,737.420548986771
+Heating_Grav,-14.129931603511718
+Neighborhood_BrkSide,-1049.2808142894282
+Neighborhood_ClearCr,-776.779289774361
+Neighborhood_CollgCr,-4896.861716365711
+Neighborhood_Edwards,-6163.593304057022
+Neighborhood_Gilbert,-3938.8690050071255
+Neighborhood_IDOTRR,-2540.0601229487384
+Neighborhood_MeadowV,-1863.2608619387447
+Neighborhood_Mitchel,-4128.7257310413415
+Neighborhood_NAmes,-7983.652032470124
+Neighborhood_NWAmes,-5484.289855710614
+Neighborhood_NoRidge,-537.0289833950103
+Neighborhood_OldTown,-4770.565357578104
+Neighborhood_SWISU,-1791.5595661367956
+Neighborhood_Sawyer,-4918.589017804389
+Neighborhood_SawyerW,-4257.348958883099
+Neighborhood_Somerst,-1690.7039613927348
+Neighborhood_Timber,-2360.857602905333
+Lot Config_CulDSac,996.893744050236
+Lot Config_FR3,-488.6869707391349
+Roof Matl_WdShngl,965.7077110944913
+Land Contour_HLS,2661.697829885106
+Sale Type_CWD,1093.6314451688554
+Sale Type_Con,1173.0785009594092
+Sale Type_ConLD,957.892410729412
+Sale Type_New,5306.652672606119
+Sale Type_Oth,439.2926034818261
+Sale Type_WD ,2519.5452678025613
+Functional_Min1,2331.7013269918084
+Functional_Min2,2181.566828287963
+Functional_Typ,5281.966279913913
+Exter Qual_TA,12658.08914964959
+Bsmt Qual_Gd,-6108.6987798124665
+Bsmt Qual_TA,-5462.460330870777
+Condition 1_Norm,2546.112491799014
+Condition 1_PosA,1509.5838415007502
+Condition 1_PosN,1554.8430717354981
+Condition 2_Norm,1665.0127932259586
+Heating QC_TA,-1935.2511859402443
+Kitchen Qual_Fa,-4205.763638732245
+Kitchen Qual_Gd,-8824.85013123777
+Kitchen Qual_TA,-10208.147746040197
+Fireplace Qu_NA,5433.676622699602
+Garage Qual_Gd,1752.7063056818847
+Half Bath_1,497.4923335396965
+Kitchen AbvGr_3,-420.0496893460011
+age_of_home,-13271.783256792469
+years_since_remodel,-3761.4817095601384
+log_lot_area,7653.858921670051
+Overall Qual x Gr Liv Area,40602.224868041936
+Overall Qual x Exter Qual_Gd,-7305.233684117573
+Overall Qual x Exter Qual_TA,-18019.56910624623
+Overall Qual x Full Bath_2,-2527.474736457502
+Overall Qual x Fireplace Qu_NA,-5681.1645701132575
+Overall Qual x Garage Cars,2839.022781631739
+Overall Qual x Garage Area,3104.3851583314836
