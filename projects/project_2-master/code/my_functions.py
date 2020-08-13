@@ -16,8 +16,8 @@ from sklearn.impute import SimpleImputer
 
 def remove_outliers(data):
     return data[(data['1st Flr SF'] < 4000) &
-               ((data)['Gr Liv Area'] < 4000) &
-               ((data)['Garage Yr Blt'] != 2207)]
+               (data['Gr Liv Area'] < 4000) &
+               (data['Garage Yr Blt'] != 2207)]
 
 # Thanks Will Badr for this! https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779
 def imp_data(data):
@@ -117,8 +117,8 @@ def create_new_features(data):
     greater_than_1982 = data['Year Built'] > 1982
     data['built_1983_to_present'] = np.where(greater_than_1982, 1, 0)
     data['built_before_1983'] = np.where(~greater_than_1982, 1, 0)
-    data['age_of_home'] = data['Year Built'] - 2010
-    data['age_of_garage'] = data['Garage Yr Blt'] - 2010
+    data['age_of_home'] = 2010 - data['Year Built'] 
+    data['age_of_garage'] = 2010 - data['Garage Yr Blt']
     data['years_since_remodel'] = data['Year Remod/Add'].apply(lambda x: 2010 - x if x != 0 else x)
     
 
@@ -138,7 +138,10 @@ def poly_features(data):
     data['Overall Qual x Neighborhood_NoRidge'] = data['Overall Qual'] * data['Neighborhood_NoRidge']
     data['Overall Qual x Fireplace Qu_NA'] = data['Overall Qual'] * data['Fireplace Qu_NA']
     data['Overall Qual x Garage Cars'] = data['Overall Qual'] * data['Garage Cars']
+    data['Overall Qual x Garage Area'] = data['Overall Qual'] * data['Garage Area']
     data['age_of_home x age_of_garage'] = data['age_of_home'] * data['age_of_garage']
+    data['Overall Qual x Exterior 1st_VinylSd'] = data['Overall Qual'] * data['Exterior 1st_VinylSd']
+    data['Overall Qual x Exterior 2nd_VinylSd'] = data['Overall Qual'] * data['Exterior 2nd_VinylSd']
     
 #     data['total_house_sf_x_overall_qual'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1) * data['Overall Qual']
     # Thank you Jezrael from Stack Overflow! https://stackoverflow.com/questions/42063716/pandas-sum-up-multiple-columns-into-one-column-without-last-column
@@ -152,6 +155,7 @@ def remove_collinear_features(data):
 #                           'Wood Deck SF',
 #                           'Open Porch SF',
                           'Gr Liv Area',
+                            'Garage Area',
 #                           'Lot Area', 
 #                          'BsmtFin SF 1',
 #                          'BsmtFin SF 2',
