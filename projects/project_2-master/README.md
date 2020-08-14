@@ -8,6 +8,46 @@ How can investors and current home owners in Ames, IA increase the value of thei
 * TARGET: Regression model to predict sale price
 * DATA DICTIONARY: original 82 variables accounted for in the [source data](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt)
 
+## Project Directory
+
+```
+project-2
+|__ code
+|   |__ 01_EDA.ipynb   
+|   |__ 02_cleaning_engineering.ipynb   
+|   |__ 03_feature_inspection.ipynb
+|   |__ 04_lasso_model.ipynb  
+|   |__ 05_ridgecv_model.ipynb
+|   |__ 06_multiple_linear_model.ipynb   
+|   |__ 07_conclusions.ipynb
+|__ datasets
+|   |__ cleaned
+|   |   |__ houses_test_clean.csv
+|   |   |__ houses_train_clean.csv
+|   |__ coefs
+|   |   |__ lasso_coefs.csv
+|   |   |__ lr_coefs.csv
+|   |   |__ ridge_coefs.csv
+|   |__ train.csv
+|   |__ test.csv
+|__ images
+|   |__ age_of_garage_and_home_pairplot.png
+|   |__ coefs_lasso_reg.png
+|   |__ coefs_lin_reg.png
+|   |__ coefs_ridge_reg.png
+|   |__ home_price_pre_post_1983.png
+|   |__ mean_price_overall_quality.png
+|   |__ sales_price_boxplot.png
+|__ submissions
+|   |__ test53_lasso.csv
+|   |__ test66_lasso.csv
+|   |__ test67ridgeCV.csv
+|   |__ test69_linreg.csv
+|__ Ames-Housing-presentation.pdf
+|__ Ames-Housing-presentation.pptm
+|__ README.md
+```
+
 ![](./images/sales_price_boxplot.png)
 ![](./images/home_price_pre_post_1983.png)
 ![](./images/mean_price_overall_quality.png)
@@ -16,9 +56,9 @@ How can investors and current home owners in Ames, IA increase the value of thei
 
 |            | **RMSE Score on Test Data (20% of original dataset)** | **RMSE Score on Kaggle Data** |
 |------------|-----------------------------------------------------------|-------------------------------|
-| **LinReg** |                 <center>19742.57</center>                 | <center>21196.37</center>     |
-| **Ridge**  |                 <center>17989.53</center>                 | <center>21378.05</center>     |
-| **Lasso**  |                 <center>19691.29</center>                 | <center>21926.43</center>     |
+| **LinReg** |                 <center>17265.16</center>                 | <center>21166.21</center>     |
+| **Ridge**  |                 <center>18031.37</center>                 | <center>21820.68</center>     |
+| **Lasso**  |                 <center>18074.75</center>                 | <center>21619.87</center>     |
 
 I chose the Linear Regression model for production because it had the smallest difference between the Test data and the unknown data.
 
@@ -47,3 +87,9 @@ And some conclusions about the models I ran:
 * Dataset: http://jse.amstat.org/v19n3/decock/DataDocumentation.txt
 * Imputing data: https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779
 * Extracting p-values from OLS Summary: https://stackoverflow.com/questions/37508158/how-to-extract-a-particular-value-from-the-ols-summary-in-pandas/41212509
+
+## Special Thanks
+
+Thank you to my instructors Adi Brohnstein, Patrick Wales-Dinan, Kelly Slatery, Noah Christiansen, and Jacob Ellena for sharing insights and knowledge throughout the course.
+
+Thank you to my study group for the late nights, good laughs, and support throughout the project! David Lee, Jenny James, James Pecore, Chris Johnson, Lydia Kajeckas, Aidan Curley, Haley Taft, Dana Hackel, Amanda Fry, Zakaria Zerhouni, Caleb Stephenson, and Josh Mizraji!

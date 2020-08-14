@@ -114,15 +114,12 @@ def create_new_features(data):
     greater_than_1982 = data['Year Built'] > 1982
     data['built_1983_to_present'] = np.where(greater_than_1982, 1, 0)
     data['age_of_home'] = 2010 - data['Year Built'] 
-#     data['age_of_garage'] = 2010 - data['Garage Yr Blt']
     data['years_since_remodel'] = data['Year Remod/Add'].apply(lambda x: 2010 - x if x != 0 else x)
     data['has_garage'] = np.where(data['Garage Yr Blt'] > 0, 1, 0)
     
 
 # Creating my own polynomial features
 def create_interaction_terms(data):
-#     data['Overall Qual ^ 2'] = data['Overall Qual'] ** 2
-#     data['Overall Qual x 1st Flr SF'] = data['Overall Qual'] * data['1st Flr SF']
     data['Overall Qual x Gr Liv Area'] =  data['Overall Qual'] * data['Gr Liv Area']
     data['Overall Qual x Exter Qual_Gd'] = data['Overall Qual'] * data['Exter Qual_Gd']
     data['Overall Qual x Exter Qual_TA'] = data['Overall Qual'] * data['Exter Qual_TA']
@@ -130,22 +127,15 @@ def create_interaction_terms(data):
     data['Overall Qual x BsmtFin Type 1_GLQ'] = data['Overall Qual'] * data['BsmtFin Type 1_GLQ']
     data['Overall Qual x Full Bath_1'] = data['Overall Qual'] * data['Full Bath_1']
     data['Overall Qual x Full Bath_2'] = data['Overall Qual'] * data['Full Bath_2']
-#     data['Overall Qual x Neighborhood_NridgHt'] = data['Overall Qual'] * data['Neighborhood_NridgHt']
-#     data['Overall Qual x Neighborhood_NoRidge'] = data['Overall Qual'] * data['Neighborhood_NoRidge']
     data['Overall Qual x Fireplace Qu_NA'] = data['Overall Qual'] * data['Fireplace Qu_NA']
     data['Overall Qual x Garage Cars'] = data['Overall Qual'] * data['Garage Cars']
     data['Overall Qual x Garage Area'] = data['Overall Qual'] * data['Garage Area']
-#     data['age_of_garage x has_garage'] = data['age_of_garage'] * data['has_garage']
     data['Overall Qual x Exterior 1st_VinylSd'] = data['Overall Qual'] * data['Exterior 1st_VinylSd']
     data['Overall Qual x Exterior 2nd_VinylSd'] = data['Overall Qual'] * data['Exterior 2nd_VinylSd']
-    
-#     data['total_house_sf_x_overall_qual'] = data[['1st Flr SF', '2nd Flr SF', 'Total Bsmt SF', 'Wood Deck SF', 'Open Porch SF']].sum(axis=1) * data['Overall Qual']
-    # Thank you Jezrael from Stack Overflow! https://stackoverflow.com/questions/42063716/pandas-sum-up-multiple-columns-into-one-column-without-last-column
 
     
 def remove_features(data):
     features_to_remove = [
-#                           '1st Flr SF',
                           '2nd Flr SF',
                           'Gr Liv Area',
                             'Garage Area',
