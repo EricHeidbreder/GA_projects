@@ -28,12 +28,12 @@ project-2
 |   |   |__ lasso_coefs.csv
 |   |   |__ lr_coefs.csv
 |   |   |__ ridge_coefs.csv
+|   |   |__ scaled_lr_coefs.csv
 |   |__ train.csv
 |   |__ test.csv
 |__ images
 |   |__ age_of_garage_and_home_pairplot.png
 |   |__ coefs_lasso_reg.png
-|   |__ coefs_lin_reg.png
 |   |__ coefs_ridge_reg.png
 |   |__ home_price_pre_post_1983.png
 |   |__ mean_price_overall_quality.png

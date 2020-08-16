@@ -113,8 +113,10 @@ def create_new_features(data):
     # Separating data into two groups, one pre 1982, one after 1982
     greater_than_1982 = data['Year Built'] > 1982
     data['built_1983_to_present'] = np.where(greater_than_1982, 1, 0)
+    # Converting years into ages
     data['age_of_home'] = 2010 - data['Year Built'] 
     data['years_since_remodel'] = data['Year Remod/Add'].apply(lambda x: 2010 - x if x != 0 else x)
+    # Creating a feature for "has garage"
     data['has_garage'] = np.where(data['Garage Yr Blt'] > 0, 1, 0)
     
 
