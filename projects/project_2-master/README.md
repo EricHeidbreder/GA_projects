@@ -1,10 +1,12 @@
 ## Problem Statement
 
-How can investors and current home owners in Ames, IA increase the value of their homes?
+Can a linear regression model trained on home price sales from 2006-2010 in Ames, IA perform better than a baseline model for predicting unknown home prices? What is the correlation between the features of a home and the sale price? How can investors and homeowners use this information to help increase the value of their homes?
 
 ## Description of Data ([Pulled from the Documentation](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt))
 * Dataset contains features of homes sold in Ames, IA between 2006 and 2010
-* SIZE: 2930 observations, 82 variables
+* SIZE: 
+ * Training set: 2051 observations, 81 variables
+ * Testing set: 878 observations, 80 variables (missing `Sale Price`)
 * TARGET: Regression model to predict sale price
 * DATA DICTIONARY: original 82 variables accounted for in the [source data](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt)
 
@@ -64,16 +66,23 @@ I chose the Linear Regression model for production because it had the smallest d
 
 ## Primary Findings/Conclusions/Recommendations
 
-![](./images/Coef_vals_linreg.png)
+|      **Feature Name**  |     **Coefficient (in dollars)**    |
+|:----------------------:|:-----------------------------------:|
+|     Kitchen Qual_TA    |                     -17353.52449    |
+|     Kitchen Qual_Gd    |                     -16072.64169    |
+|       Bsmt Qual_Gd     |                     -11528.71693    |
+|      Total Bsmt SF     |                        19.312078    |
+|       BsmtFin SF 1     |                        21.700437    |
 
 After running all the tests on the data, I've come to the following conclusions about the **best ways to improve a home's value**:
-* Remodel your kitchen! The quality of a kitchen impacts a home price approximately 20000 dollars when all other variables are held constant.
-* Finish your basement! We see that total basement square footage and finished basement square footage both positively impact your home's value by about 8000 dollars when all other variables are held constant
-* While it's a pricey endeavor, adding a second bathroom can drastically increase your home's value. Estimates range between 12,000-32,000 dollars when all other variables are held constant
-* Look for cheap sales in Stone Brook, the neighborhood is booming!
+* **Remodel your kitchen!** When compared to a kitchen of Excellent quality, a good to poor kitchen may negatively impact your house value by 16,000 dollars when all other variables are equal.
+* **Remodel your basement!** When compared to basements of Excellent quality, a Good to poor basement may negatively impact your house value by around $21 per sf when all other variables are held constant
+
+
+
 
 And some conclusions about the models I ran:
-* The Lasso model seemed to perform the most consistently, though the many interaction terms made the results difficult to interpret literally. I was able to detect trends across the three models that led me to my conclusions.
+* The Lasso model seemed to perform the most consistently, though the many interaction terms made the results difficult to interpret literally.
 * A simpler model with less features would sacrifice accuracy for the sake of a clearer, actionable understanding of the correlation between features and sale price.
 
 ## Next Steps
