@@ -1,167 +1,121 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 3: Web APIs & NLP
+# Reddit Classification Project Executive Summary
 
-### Description
+In this project, we're going to be looking for a model that classifies different subreddits based on the content of posts within the subreddit.
 
-In week four we've learned about a few different classifiers. In week five we'll learn about webscraping, APIs, and Natural Language Processing (NLP). This project will put those skills to the test.
+## Problem Statement
 
-For project 3, your goal is two-fold:
-1. Using [Pushshift's](https://github.com/pushshift/api) API, you'll collect posts from two subreddits of your choosing.
-2. You'll then use NLP to train a classifier on which subreddit a given post came from. This is a binary classification problem.
+Is the language in text posts from the subreddits of **Punk** and **PopPunkers** different enough that a classification model can predict which subreddit a post belongs to with an accuracy higher than the baseline?
 
+To answer this question, we'll test multiple models using `GridSearchCV` to iterate through models with different parameters we've identified as being important to the success of our model. 
 
-#### About the API
+## Data Description
 
-Pushshift's API is fairly straightforward. For example, if I want the posts from [`/r/boardgames`](https://www.reddit.com/r/boardgames), all I have to do is use the following url: https://api.pushshift.io/reddit/search/submission?subreddit=boardgames
+### Size of our Data
+* 5000 posts with 79 features per post
+  * 2500 from subreddit r/Punk
+  * 2500 from subreddit r/PopPunk
 
-To help you get started, we have a primer video on how to use the API: https://youtu.be/AcrjEWsMi_E
+### Data Source
 
----
+Our data was scraped from posts made on the following subreddits using the [PushShift API](https://github.com/pushshift/api):
+* https://reddit.com/r/Punk
+* https://reddit.com/r/PopPunkers
 
-### Requirements
+### Data Target
 
-- Gather and prepare your data using the `requests` library.
-- **Create and compare two models**. These must an be any classifier of your choosing: logistic regression, KNN, SVM, Random Forest Classifier, etc.
-  - **Bonus**: use a Naive Bayes classifier
-- A Jupyter Notebook with your analysis for a peer audience of data scientists.
-- An executive summary of your results.
-- A short presentation outlining your process and findings for a semi-technical audience.
+We're trying to **classify** the **subreddit** that a post came from
 
-**Pro Tip:** You can find a good example executive summary [here](https://www.proposify.biz/blog/executive-summary).
+### Features Chosen
 
----
+In the final model, we only referenced the `selftext` feature of the original dataset - this is the **body** of a post which typically contains more text than a post title.
 
-### Necessary Deliverables / Submission
+### Exploratory Data Analysis Visualizations
 
-- Code and executive summary must be in a clearly commented Jupyter Notebook.
-- You must submit your slide deck.
-- Presentation materials must be submitted by **10:00 AM on Friday, August 28th**.
-- The rest of the materials (Jupyter Notebooks, data files, etc.) must be submit by **EOD (Midnight EST) on Friday, August 28th**.
+![](./images/hist_posts_over_5.png)
 
----
+![](./images/posts_contain_links.png)
 
-## Rubric
-Your instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
+## Model Performance on Training/Test Data
 
-For Project 3 the evaluation categories are as follows:<br>
-**The Data Science Process**
-- Problem Statement
-- Data Collection
-- Data Cleaning & EDA
-- Preprocessing & Modeling
-- Evaluation and Conceptual Understanding
-- Conclusion and Recommendations
+I experimented with the following models:
+* Logistic Regression
+* Multinomial Naive Bayes
+* Support Vector Classifier
 
-**Organization and Professionalism**
-- Organization
-- Visualizations
-- Python Syntax and Control Flow
-- Presentation
+And the following transformers:
+* Count Vectorizer
+* TF-IDF Vectorizer
 
-**Scores will be out of 30 points based on the 10 categories in the rubric.** <br>
-*3 points per section*<br>
+And GridSearched extensively over the following parameters:
 
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
+| Feature Name         | Description                                                                                                                   |
+|:----------------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| `max_df`             | Maximum document frequency, if value is a float,  ignores features present in a proportion of the  documents above this value |
+| `min_df`             | Minimum document frequency, if value is a float, ignores features present in a proportion of the  documents below this value  |
+| `ngram_range`        | Tuple representing the range of n-grams to split a document into                                                              |
+| `stop_words`         | A list of words that will be ignored by the vectorizer                                                                        |
+| `max_features`       | The max amount of features our vectorizer will return, priority given to the most  frequently encountered features            |
+| `C`                  | For the SVC model only - a regularization parameter. Strength of regularization is inversely proportional to the value of C   |
+| `cvec__` or `tvec__` | Suffixes for parameters, stand for CountVectorizer() and TfidfVectorizer()                                                    |
 
+### GridSearchCV Results
 
-### The Data Science Process
+| Test Number | cvec__max_df | cvec__max_features | cvec__min_df | cvec__ngram_range | cvec__stop_words | vectorizer                                   | model                             | train_score | test_score  | svc__C   | tvec__max_df | tvec__max_features | tvec__min_df | tvec__ngram_range |
+|-------------|--------------|--------------------|--------------|-------------------|------------------|----------------------------------------------|-----------------------------------|-------------|-------------|----------|--------------|--------------------|--------------|-------------------|
+| 1           | 0.95         | 4000               | 0.001        | (1, 2)            | custom_sw        | CountVectorizer(tokenizer=tokenize_and_stem) | LogisticRegression(max_iter=2000) | 0.788779028 | 0.830721003 |          |              |                    |              |                   |
+| 3           | 0.99         | 4000               | 0            | (1, 2)            | custom_sw        | CountVectorizer(tokenizer=tokenize_and_stem) | LogisticRegression(max_iter=2000) | 0.787733124 | 0.831765935 |          |              |                    |              |                   |
+| 5           | 0.8          | 4000               | 0            | (1, 2)            | custom_sw        | CountVectorizer(tokenizer=tokenize_and_stem) | LogisticRegression(max_iter=2000) | 0.787733124 | 0.831765935 |          |              |                    |              |                   |
+| 2           | 0.99         | 4000               | 0            | (1, 2)            | custom_sw        | CountVectorizer(tokenizer=tokenize_and_stem) | MultinomialNB()                   | 0.812131273 | 0.832810867 |          |              |                    |              |                   |
+| 4           | 0.8          | 4000               | 0            | (1, 2)            | custom_sw        | CountVectorizer(tokenizer=tokenize_and_stem) | MultinomialNB()                   | 0.812131273 | 0.832810867 |          |              |                    |              |                   |
+| 0           | 0.95         | 4000               | 0.001        | (1, 2)            | custom_sw        | CountVectorizer(tokenizer=tokenize_and_stem) | MultinomialNB()                   | 0.811782841 | 0.834900731 |          |              |                    |              |                   |
+| 6           |              |                    |              |                   |                  | TfidfVectorizer()                            | SVC(degree=2, kernel='poly')      | 0.79330074  | 0.807732497 | 0.789495 | 0.95         | 4000               | 0.002        | (1, 1)            |
+| 7           |              |                    |              |                   |                  | TfidfVectorizer()                            | SVC(degree=2, kernel='poly')      | 0.79330074  | 0.807732497 | 0.789495 | 0.99         | 4000               | 0.002        | (1, 1)            |
+| 8           |              |                    |              |                   |                  | TfidfVectorizer()                            | SVC(degree=2, kernel='poly')      | 0.79330074  | 0.807732497 | 0.789495 | 0.8          | 4000               | 0.002        | (1, 1)            |
 
-**Problem Statement**
-- Is it clear what the goal of the project is?
-- What type of model will be developed?
-- How will success be evaluated?
-- Is the scope of the project appropriate?
-- Is it clear who cares about this or why this is important to investigate?
-- Does the student consider the audience and the primary and secondary stakeholders?
+I chose to use Test Number 4, a `MultinomialNB()` model with the following parameters:
 
-**Data Collection**
-- Was enough data gathered to generate a significant result?
-- Was data collected that was useful and relevant to the project?
-- Was data collection and storage optimized through custom functions, pipelines, and/or automation?
-- Was thought given to the server receiving the requests such as considering number of requests per second?
+| Parameter           | Value
+|:--------------------|:----------------------------------------------|
+| `cvec__max_df`       | 0.8   
+| `cvec__max_features` | 4000                                         |
+| `cvec__min_df`       | 0                                            |
+| `cvec__ngram_range`  | (1, 2)                                       |
+| `cvec__stop_words`   | custom_sw                                    |
+| vectorizer         | CountVectorizer(tokenizer=tokenize_and_stem) |
+| model              | MultinomialNB()                              |
 
-**Data Cleaning and EDA**
-- Are missing values imputed/handled appropriately?
-- Are distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-- Does the student address whether or not they are likely to be able to answer their problem statement with the provided data given what they've discovered during EDA?
+### Model Performance
 
-**Preprocessing and Modeling**
-- Is text data successfully converted to a matrix representation?
-- Are methods such as stop words, stemming, and lemmatization explored?
-- Does the student properly split and/or sample the data for validation/training purposes?
-- Does the student test and evaluate a variety of models to identify a production algorithm (**AT MINIMUM:** Bayes and one other model)?
-- Does the student defend their choice of production model relevant to the data at hand and the problem?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
+This MultinomialNB() model had the following accuracy:
+* **Training Data**: ~81.2%
+* **Testing Data** : ~83.3%
 
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem objective?
-- Does the student interpret the results of their model for purposes of inference?
-- Is domain knowledge demonstrated when interpreting results?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
+For comparison, our **baseline model** to has an accuracy of ~50%, so the model we built **outperforms the baseline** model, predicting the origin of a post ~33.3% better than the baseline.
 
-**Conclusion and Recommendations**
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Does the student address how findings of this research can be applied for the benefit of stakeholders?
-- Are future steps to move the project forward identified?
+### Digging deeper into our predictions
 
+![](./images/freq_words_top_100_punk.png)
 
-### Organization and Professionalism
+![](./images/freq_words_top_100_poppunk.png)
 
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
+We can't make any strong conclusions about the words here, but it is interesting to see that there aren't many band names in the top 20 for each category, except for *maybe* Black Flag in the `Punk` Subreddit, but there seem to be a mix of posts about black flag **AND** posts about the Black Lives Matter movement. 
 
-**Visualizations**
-- Are sufficient visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
+Something interesting to note is that **'love' and 'friend'** pop up frequently in the posts that had the highest predictions of being in the `PopPunkers` subreddit, wheras those words are not to be found in the top 20 words in the `Punk` subreddit. 
 
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Are `sklearn` and `NLTK` methods used appropriately?
+![](./images/freq_words_pred_wrong.png)
 
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
+Looking at this visual compared to the ones above, we can conclude there are quite a few words that intersect between the subreddits. Specifically **'punk' and 'band'**
 
+## Final Conclusions
 
----
+* The subreddits PopPunkers and Punk aren't completely separate groups, there is some overlap between them that trips up our Multinomial Naive Bayes model. Most notably, the words 'punk' and 'band' seem to be used regularly in both subreddits.
+* The model outperforms the baseline model by ~33%, so this model could be useful for **marketing and messaging** purposes if further exploration and analysis is conducted on the **topics and words most commonly used** in each subreddit.
 
-### Why did we choose this project for you?
-This project covers three of the biggest concepts we cover in the class: Classification Modeling, Natural Language Processing and Data Wrangling/Acquisition.
+## Next Steps
 
-Part 1 of the project focuses on **Data wrangling/gathering/acquisition**. This is a very important skill as not all the data you will need will be in clean CSVs or a single table in SQL.  There is a good chance that wherever you land you will have to gather some data from some unstructured/semi-structured sources; when possible, requesting information from an API, but often scraping it because they don't have an API (or it's terribly documented).
-
-Part 2 of the project focuses on **Natural Language Processing** and converting standard text data (like Titles and Comments) into a format that allows us to analyze it and use it in modeling.
-
-Part 3 of the project focuses on **Classification Modeling**.  Given that project 2 was a regression focused problem, we needed to give you a classification focused problem to practice the various models, means of assessment and preprocessing associated with classification.   
+* I'd like see how accurate the model was at predicting subreddits when the most important words are present.
+ * I could reference posts containing each word and determine whether they were predicted correctly or not and store that in the `sorted_proba` dataframe
+* Potentially removing words that seemed to trip up the model to improve accuracy rate
+* Add the list of 'blacklisted bands' from the Punk subreddit and see if that improves accuracy
+* Run model on different subreddits
+* Run model on more than two subreddits

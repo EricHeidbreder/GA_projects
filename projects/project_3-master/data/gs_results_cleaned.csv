@@ -1,0 +1,10 @@
+cvec__max_df,cvec__max_features,cvec__min_df,cvec__ngram_range,cvec__stop_words,vectorizer,model,train_score,test_score,svc__C,tvec__max_df,tvec__max_features,tvec__min_df,tvec__ngram_range
+0.95,4000,0.001,"(1, 2)",custom_sw,CountVectorizer(tokenizer=<function tokenize_and_stem at 0x000002C7286C1B88>),MultinomialNB(),0.811782841,0.834900731,,,,,
+0.95,4000,0.001,"(1, 2)",custom_sw,CountVectorizer(tokenizer=<function tokenize_and_stem at 0x000002C7286C1B88>),LogisticRegression(max_iter=2000),0.788779028,0.830721003,,,,,
+0.99,4000,0,"(1, 2)",custom_sw,CountVectorizer(tokenizer=<function tokenize_and_stem at 0x000002C7286C1B88>),MultinomialNB(),0.812131273,0.832810867,,,,,
+0.99,4000,0,"(1, 2)",custom_sw,CountVectorizer(tokenizer=<function tokenize_and_stem at 0x000002C7286C1B88>),LogisticRegression(max_iter=2000),0.787733124,0.831765935,,,,,
+0.8,4000,0,"(1, 2)",custom_sw,CountVectorizer(tokenizer=<function tokenize_and_stem at 0x000002C7286C1B88>),MultinomialNB(),0.812131273,0.832810867,,,,,
+0.8,4000,0,"(1, 2)",custom_sw,CountVectorizer(tokenizer=<function tokenize_and_stem at 0x000002C7286C1B88>),LogisticRegression(max_iter=2000),0.787733124,0.831765935,,,,,
+,,,,,TfidfVectorizer(),"SVC(degree=2, kernel='poly')",0.79330074,0.807732497,0.789495,0.95,4000,0.002,"(1, 1)"
+,,,,,TfidfVectorizer(),"SVC(degree=2, kernel='poly')",0.79330074,0.807732497,0.789495,0.99,4000,0.002,"(1, 1)"
+,,,,,TfidfVectorizer(),"SVC(degree=2, kernel='poly')",0.79330074,0.807732497,0.789495,0.8,4000,0.002,"(1, 1)"

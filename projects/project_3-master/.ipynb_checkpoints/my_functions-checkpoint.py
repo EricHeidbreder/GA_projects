@@ -4,6 +4,13 @@ from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 
 def tokenize_and_stem(text):
+    '''
+    This does more than just tokenize and stem! The code removes links and
+    html artifacts and is great for dirty data scraped from Reddit.
+    
+    Needs to be run within a loop to work properly.
+    '''
+        
     # Getting rid of links
     text = [word for word in text.lower().split() if not 'http' in word]
     text = ' '.join(text)
