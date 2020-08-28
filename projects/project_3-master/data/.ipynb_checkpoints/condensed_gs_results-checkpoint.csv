@@ -1,0 +1,10 @@
+Test Number,model,cvec__ngram_range,tvec__ngram_range,train_score,test_score
+1,LogisticRegression(max_iter=2000),"(1, 2)",,0.7887790284035975,0.8307210031347962
+3,LogisticRegression(max_iter=2000),"(1, 2)",,0.7877331241524832,0.8317659352142109
+5,LogisticRegression(max_iter=2000),"(1, 2)",,0.7877331241524832,0.8317659352142109
+2,MultinomialNB(),"(1, 2)",,0.8121312731451921,0.832810867293626
+4,MultinomialNB(),"(1, 2)",,0.8121312731451921,0.832810867293626
+0,MultinomialNB(),"(1, 2)",,0.8117828410894431,0.8349007314524556
+6,"SVC(degree=2, kernel='poly')",,"(1, 1)",0.7933007400380659,0.8077324973876698
+7,"SVC(degree=2, kernel='poly')",,"(1, 1)",0.7933007400380659,0.8077324973876698
+8,"SVC(degree=2, kernel='poly')",,"(1, 1)",0.7933007400380659,0.8077324973876698
